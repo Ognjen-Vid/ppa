@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript" src="/assets/js/angular.min.js" ></script>
+<script type="text/javascript" src="/assets/js/angular-route.min.js" ></script>
+<script type="text/javascript" src="/app/js/main.js"></script >
+
+<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js" ></script>
+<script type="text/javascript" src="/assets/js/bootstrap.min.js" ></script>
+
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
+</head>
+<body>
+
+	<div class="container-fluid">
+		<nav class="navbar">
+			<ul class="nav nav-pills">
+				<li><a href="#!/">Home</a></li>
+				<li><a href="#!/nabavke">Nabavke</a></li>
+				<li><a href="#!/ugovori">Ugovori</a></li>
+				<li><a href="#!/dobavljaci">Dobavljaci</a></li>
+			</ul>
+		</nav>
+		<div ng-app="ppa">
+			<div ng-view></div>
+		</div> 
+	</div>
+
+</body>
+</html>

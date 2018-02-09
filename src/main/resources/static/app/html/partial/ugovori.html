@@ -1,0 +1,134 @@
+<div ng-controller="ugovoriCtrl">
+
+	<div class="page-header" style="margin-top: 20p">
+		<h3>
+			Ugovori <span class="badge">{{totalUgovori}}</span>
+		</h3>
+		<button class="btn btn-success" ng-click="changeView()">
+			<span class="{{iconClass}}"></span>{{option}}
+		</button>
+	</div>
+
+	<div id="saveEntity" class="container-fluid" ng-show="show">
+		<form class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+			<div class="form-group">
+				<label for="interniBroj">Interni broj</label>
+				<input class="form-control" id="interniBroj" type="text" ng-model="noviUgovor.interniBroj">
+			</div>
+			<div class="form-group">
+				<label for="ugovorenaVrednost">Ugovorena vrednost</label>
+				<input class="form-control" id="ugovorenaVrednost " type="text" ng-model="noviUgovor.ugovorenaVrednost">
+			</div>
+			<div class="form-group">
+				<label for="nabavkaId">Oznaka nabavke</label>
+				<select class="form-control" id="nabavkaId" ng-options="n.id as n.oznaka for n in nabavke" ng-model="noviUgovor.nabavkaId">
+					<option value=""></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="dobavljacNaziv"">Naziv Dobavljaca</label>
+				<input class="form-control" id="dobavljacNaziv" " type="text" ng-model="noviUgovor.dobavljacNaziv">
+			</div>
+			<div class="form-group">
+				<label for="dobavljacMaticniBroj">Maticni Broj Dobavljaca</label>
+				<input class="form-control" id="dobavljacMaticniBroj " type="text" ng-model="noviUgovor.dobavljacMaticniBroj">
+			</div>
+			<button class="pull-right btn btn-primary" ng-click="save()">
+				<span class="glyphicon glyphicon-floppy-save"></span>Save
+			</button>
+		</form>
+	</div>
+	
+	<div id="searchEntity" class="container-fluid" ng-show="!show">
+		<form class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+			<div class="form-group">
+				<label for="interniBroj">Interni broj</label>
+				<input class="form-control" id="interniBroj" type="text" ng-model="trazeniUgovor.interniBroj" ng-change="search()">
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="ugovorenaVrednostMin">Ugovorena vrednost Min</label>
+					<input class="form-control" id="ugovorenaVrednostMin" type="text"
+						ng-model="trazeniUgovor.ugovorenaVrednostMin" ng-change="search()">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="ugovorenaVrednostMax">Ugovorena vrednost Max</label>
+					<input class="form-control" id="ugovorenaVrednostMax" type="text"
+						ng-model="trazeniUgovor.ugovorenaVrednostMax" ng-change="search()">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="nabavkaId">Oznaka nabavke</label>
+				<select class="form-control" id="nabavkaId" ng-options="n.id as n.oznaka for n in nabavke" ng-model="trazeniUgovor.nabavkaId" ng-change="search()">
+					<option value=""></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="dobavljacNaziv">Naziv Dobavljaca</label>
+				<input class="form-control" id="dobavljacNaziv " type="text" ng-model="trazeniUgovor.dobavljacNaziv" ng-change="search()">
+			</div>
+			<div class="form-group">
+				<label for="dobavljacMaticniBroj">Maticni Broj Dobavljaca</label>
+				<input class="form-control" id="dobavljacMaticniBroj " type="text" ng-model="trazeniUgovor.dobavljacMaticniBroj" ng-change="search()">
+			</div>
+			<div class="form-group">
+				<label for="vrstaPostupkaId">Vrsta postupka</label>
+				<select class="form-control" id="vrstaPostupkaId"
+					ng-options="vPo.id as vPo.naziv for vPo in vrstePostupka"
+					ng-model="trazeniUgovor.vrstaPostupkaId" ng-change="search()">
+					<option value=""></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="vrstaPredmetaId">Vrsta predmeta</label>
+				<select class="form-control" id="vrstaPredmetaId"
+					ng-options="vPr.id as vPr.naziv for vPr in vrstePredmeta"
+					ng-model="trazeniUgovor.vrstaPredmetaId" ng-change="search()">
+					<option value=""></option>
+				</select>
+			</div>
+		</form>
+	</div>
+	
+	<div class="pull-right container-fluid">
+		<button class="btn btn-primary" ng-click="prev()" ng-disabled="pageNum == 0">
+			<span class="glyphicon glyphicon-chevron-left"></span>Prev
+		</button>
+		<button class="btn btn-primary" ng-click="next()" ng-disabled="pageNum == totalPages-1">
+			Next<span class="glyphicon glyphicon-chevron-right"></span>
+		</button>
+	</div>
+
+	<div class="container-fluid">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Interni broj</th>
+					<th>Ugovorena vrednost</th>
+					<th>Oznaka nabavke</th>
+					<th>Naziv Dobavljaca</th>
+					<th>Maticni Broj Dobavljaca</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="u in ugovori| orderBy : 'name' : reverse">
+					<td>{{u.interniBroj}}</td>
+					<td>{{u.ugovorenaVrednost}}</td>
+					<td>{{u.nabavkaOznaka}}</td>
+					<td>{{u.dobavljacNaziv}}</td>
+					<td>{{u.dobavljacMaticniBroj}}</td>
+					<td>
+						<button class="btn btn-warning" ng-click="editHere(u.id)">
+							<span class="glyphicon glyphicon-pencil"></span>Edit Here
+						</button>
+						<button class="btn btn-danger" ng-click="delete(u.id)">
+							<span class="glyphicon glyphicon-trash"></span>Delete
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>

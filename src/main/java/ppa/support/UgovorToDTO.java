@@ -23,6 +23,7 @@ public class UgovorToDTO implements Converter<Ugovor, UgovorDTO>{
 		dto.setNabavkaId(persisted.getNabavka().getId());
 		dto.setNabavkaOznaka(persisted.getNabavka().getOznaka());
 		dto.setUgovorenaVrednost(persisted.getUgovorenaVrednost());
+		dto.setDatumZakljucenja(persisted.getDatumZakljucenja());
 		return dto;
 	}
 	

@@ -1,13 +1,16 @@
 package ppa.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table
@@ -21,6 +24,8 @@ public class Ugovor {
 	String interniBroj;
 	@Column
 	int ugovorenaVrednost;
+	@Temporal(TemporalType.DATE)
+	Date datumZakljucenja;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	Nabavka nabavka;
@@ -74,4 +79,12 @@ public class Ugovor {
 			dobavljac.getUgovori().add(this); // Ovde bi trebalo da stoji dobavljac.add(this);
 	}
 
+	public Date getDatumZakljucenja() {
+		return datumZakljucenja;
+	}
+
+	public void setDatumZakljucenja(Date datumZakljucenja) {
+		this.datumZakljucenja = datumZakljucenja;
+	}
+	
 }

@@ -20,9 +20,12 @@
 				<input class="form-control" id="ugovorenaVrednost " type="text" ng-model="noviUgovor.ugovorenaVrednost">
 			</div>
 			<div class="form-group">
+				<label for="datumZakljucenja">Datum zaključenja</label>
+				<input class="form-control" id="datumZakljucenja " type="date" ng-model="noviUgovor.datumZakljucenja">
+			</div>
+			<div class="form-group">
 				<label for="nabavkaId">Oznaka nabavke</label>
 				<select class="form-control" id="nabavkaId" ng-options="n.id as n.oznaka for n in nabavke" ng-model="noviUgovor.nabavkaId">
-					<option value=""></option>
 				</select>
 			</div>
 			<div class="form-group">
@@ -55,6 +58,18 @@
 					<label for="ugovorenaVrednostMax">Ugovorena vrednost Max</label>
 					<input class="form-control" id="ugovorenaVrednostMax" type="text"
 						ng-model="trazeniUgovor.ugovorenaVrednostMax" ng-change="search()">
+				</div>
+			</div>
+				<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="datumZakljucenjaOd">Datum Zaključenja Od</label>
+					<input class="form-control" id="datumZakljucenjaOd" type="text"
+						ng-model="trazeniUgovor.datumZakljucenjaOd" ng-change="search()">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="datumZakljucenjaDo">Datum Zaključenja Do</label>
+					<input class="form-control" id="datumZakljucenjaDo" type="text"
+						ng-model="trazeniUgovor.datumZakljucenjaDo" ng-change="search()">
 				</div>
 			</div>
 			<div class="form-group">
@@ -105,25 +120,27 @@
 				<tr>
 					<th>Interni broj</th>
 					<th>Ugovorena vrednost</th>
+					<th>Datum zaključenja</th>
 					<th>Oznaka nabavke</th>
 					<th>Naziv Dobavljaca</th>
 					<th>Maticni Broj Dobavljaca</th>
-					<th>Actions</th>
+					<th>Akcije</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="u in ugovori| orderBy : 'name' : reverse">
 					<td>{{u.interniBroj}}</td>
 					<td>{{u.ugovorenaVrednost}}</td>
+					<td>{{u.datumZakljucenja}}</td>
 					<td>{{u.nabavkaOznaka}}</td>
 					<td>{{u.dobavljacNaziv}}</td>
 					<td>{{u.dobavljacMaticniBroj}}</td>
 					<td>
 						<button class="btn btn-warning" ng-click="editHere(u.id)">
-							<span class="glyphicon glyphicon-pencil"></span>Edit Here
+							<span class="glyphicon glyphicon-pencil"></span>Izmeni ovde
 						</button>
 						<button class="btn btn-danger" ng-click="delete(u.id)">
-							<span class="glyphicon glyphicon-trash"></span>Delete
+							<span class="glyphicon glyphicon-trash"></span>Obriši
 						</button>
 					</td>
 				</tr>

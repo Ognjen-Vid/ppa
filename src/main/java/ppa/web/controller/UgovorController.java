@@ -1,5 +1,6 @@
 package ppa.web.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ public class UgovorController {
 			@RequestParam(required = false) String dobavljacMaticniBroj,
 			@RequestParam(required = false) Integer ugovorenaVrednostMin, 
 			@RequestParam(required = false) Integer ugovorenaVrednostMax,
+			@RequestParam(required = false) Date datumZakljucenjaOd,
+			@RequestParam(required = false) Date datumZakljucenjaDo,
 			@RequestParam(required = false) Long nabavkaId,
 			@RequestParam(required = false) Long vrstaPostupkaId,
 			@RequestParam(required = false) Long vrstaPredmetaId,

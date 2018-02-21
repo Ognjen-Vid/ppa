@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import ppa.model.Dobavljac;
 import ppa.model.Ugovor;
 import ppa.service.DobavljacService;
 import ppa.service.NabavkaService;
@@ -34,16 +33,9 @@ public class DTOtoUgovor implements Converter<UgovorDTO, Ugovor>{
 				throw new IllegalArgumentException("Izmena nepostojceg entitea");
 			}
 		}
-		Dobavljac dobavljac = dobavljacService.findByMaticniBroj(dto.getDobavljacMaticniBroj());
-		if(dobavljac == null) {
-			dobavljac = new Dobavljac();
-			dobavljac.setNaziv(dto.getDobavljacNaziv());
-			dobavljac.setMaticniBroj(dto.getDobavljacMaticniBroj());
-			dobavljacService.save(dobavljac);
-			dobavljac = dobavljacService.findByMaticniBroj(dto.getDobavljacMaticniBroj());
-		}
-		ugovor.setDobavljac(dobavljac);
+		ugovor.setDobavljac(dobavljacService.findByMaticniBroj(dto.getDobavljacMaticniBroj(), dto.getDobavljacNaziv()));
 		ugovor.setInterniBroj(dto.getInterniBroj());
+		ugovor.setDatumZakljucenja(dto.getDatumZakljucenja());
 		ugovor.setNabavka(nabavkaService.findOne(dto.getNabavkaId()));
 		ugovor.setUgovorenaVrednost(dto.getUgovorenaVrednost());
 		return ugovor;

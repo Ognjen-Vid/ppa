@@ -12,7 +12,7 @@ public interface DobavljacService {
 			String naziv,
 			String maticniBroj,
 			int pageNum);
-	Dobavljac findByMaticniBroj(String maticniBroj);
+	Dobavljac findByMaticniBroj(String maticniBroj, String naziv);
 	void save(Dobavljac dobavljac);
 	void delete(Long id);
 

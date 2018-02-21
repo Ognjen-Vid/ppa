@@ -38,9 +38,19 @@ public class DobavljacServiceImpl implements DobavljacService {
 		return dobavljacRepo.findAll(naziv, maticniBroj, new PageRequest(pageNum, 5));
 	}
 	
+	//S obzirom da se ova metoda poziva jedino prilikom unosa novog ugovora
+	//u slucaju da dobavljac ne postoji, dodace se u bazu
 	@Override
-	public Dobavljac findByMaticniBroj(String maticniBroj) {
-		return dobavljacRepo.findByMaticniBroj(maticniBroj);
+	public Dobavljac findByMaticniBroj(String maticniBroj, String naziv) {
+		Dobavljac dobavljac = dobavljacRepo.findByMaticniBroj(maticniBroj);
+		if(dobavljac == null) {
+			dobavljac = new Dobavljac();
+			dobavljac.setNaziv(naziv);
+			dobavljac.setMaticniBroj(maticniBroj);
+			dobavljacRepo.save(dobavljac);
+			dobavljac = dobavljacRepo.findByMaticniBroj(maticniBroj);
+		}
+		return dobavljac;
 	}
 	
 	@Override

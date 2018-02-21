@@ -1,5 +1,7 @@
 package ppa.repository;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +18,8 @@ public interface UgovorRepository extends JpaRepository<Ugovor, Long> {
 			+ "(:dobavljacMaticniBroj IS NULL or u.dobavljac.maticniBroj LIKE :dobavljacMaticniBroj) AND"
 			+ "(:ugovorenaVrednostMin IS NULL or u.ugovorenaVrednost >= :ugovorenaVrednostMin) AND"
 			+ "(:ugovorenaVrednostMax IS NULL or u.ugovorenaVrednost <= :ugovorenaVrednostMax) AND"
+			+ "(:datumZakljucenjaOd IS NULL or u.datumZakljucenja >= :datumZakljucenjaOd) AND"
+			+ "(:datumZakljucenjaDo IS NULL or u.datumZakljucenja <= :datumZakljucenjaDo) AND"
 			+ "(:nabavkaId IS NULL or u.nabavka.id = :nabavkaId) AND"
 			+ "(:vrstaPostupkaId IS NULL or u.nabavka.vrstaPostupka.id = :vrstaPostupkaId) AND"
 			+ "(:vrstaPredmetaId iS NULL or u.nabavka.vrstaPredmeta.id = :vrstaPredmetaId)")
@@ -24,7 +28,9 @@ public interface UgovorRepository extends JpaRepository<Ugovor, Long> {
 			@Param(value = "dobavljacNaziv") String dobavljacNaziv, 
 			@Param(value = "dobavljacMaticniBroj") String dobavljacMaticniBroj,
 			@Param(value = "ugovorenaVrednostMin") Integer ugovorenaVrednostMin, 
-			@Param(value = "ugovorenaVrednostMax") Integer ugovorenaVrednostMax, 
+			@Param(value = "ugovorenaVrednostMax") Integer ugovorenaVrednostMax,
+			@Param(value = "datumZakljucenjaOd") Date datumZakljucenjaOd, 
+			@Param(value = "datumZakljucenjaDo") Date datumZakljucenjaDo,
 			@Param(value = "nabavkaId") Long nabavkaId, 
 			@Param(value = "vrstaPostupkaId") Long vrstaPostupkaId,
 			@Param(value = "vrstaPredmetaId") Long vrstaPredmetaId, 

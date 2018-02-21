@@ -446,6 +446,7 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 	$scope.noviUgovor = {};
 	$scope.noviUgovor.interniBroj = "";
 	$scope.noviUgovor.ugovorenaVrednost = "";
+	$scope.noviUgovor.datumZakljucenja = "";
 	$scope.noviUgovor.nabavkaId = "";
 	$scope.noviUgovor.dobavljacNaziv = "";
 	$scope.noviUgovor.dobavljacMaticniBroj = "";
@@ -454,6 +455,8 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 	$scope.trazeniUgovor.interniBroj = "";
 	$scope.trazeniUgovor.ugovorenaVrednostMin = "";
 	$scope.trazeniUgovor.ugovorenaVrednostMax = "";
+	$scope.trazeniUgovor.datumZakljucenjaOd = "";
+	$scope.trazeniUgovor.datumZakljucenjaDo = "";
 	$scope.trazeniUgovor.nabavkaId = "";
 	$scope.trazeniUgovor.dobavljacNaziv = "";
 	$scope.trazeniUgovor.dobavljacMaticniBroj = "";

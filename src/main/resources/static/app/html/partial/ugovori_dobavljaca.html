@@ -1,21 +1,21 @@
 <div ng-controller="ugovoriDobavljacaCtrl">
 	<div class="page-header" style="margin-top: 20p">
 		<h3>
-			Ugovori dobavljaca <span class="badge">{{totalUgovori}}</span>
+			Ugovori dobavljača <span class="badge">{{totalUgovori}}</span>
 		</h3>
 	</div>
 	
 	<div class="pull-left container-fluid">
 		<button class="btn btn-primary" ng-click="back()">
-			<span class="glyphicon glyphicon-chevron-left"></span>Back
+			<span class="glyphicon glyphicon-chevron-left"></span>Povratak
 		</button>
 	</div>
 	<div class="pull-right container-fluid">
 		<button class="btn btn-primary" ng-click="prev()" ng-disabled="pageNum == 0">
-			<span class="glyphicon glyphicon-chevron-left"></span>Prev
+			<span class="glyphicon glyphicon-chevron-left"></span>Prethodni
 		</button>
 		<button class="btn btn-primary" ng-click="next()" ng-disabled="pageNum == totalPages-1">
-			Next<span class="glyphicon glyphicon-chevron-right"></span>
+			Sledeći<span class="glyphicon glyphicon-chevron-right"></span>
 		</button>
 	</div>
 
@@ -26,8 +26,8 @@
 					<th>Interni broj</th>
 					<th>Ugovorena vrednost</th>
 					<th>Oznaka nabavke</th>
-					<th>Naziv Dobavljaca</th>
-					<th>Maticni Broj Dobavljaca</th>
+					<th>Naziv dobavljača</th>
+					<th>Matični broj dobavljača</th>
 				</tr>
 			</thead>
 			<tbody>

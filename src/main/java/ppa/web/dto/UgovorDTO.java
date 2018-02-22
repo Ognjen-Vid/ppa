@@ -4,7 +4,7 @@ public class UgovorDTO {
 
 	Long id;
 	String interniBroj;
-	int ugovorenaVrednost;
+	String ugovorenaVrednost;
 	String datumZakljucenja;
 	
 	Long nabavkaId;
@@ -38,14 +38,14 @@ public class UgovorDTO {
 		this.interniBroj = interniBroj;
 	}
 
-	public int getUgovorenaVrednost() {
+	public String getUgovorenaVrednost() {
 		return ugovorenaVrednost;
 	}
 
-	public void setUgovorenaVrednost(int ugovorenaVrednost) {
+	public void setUgovorenaVrednost(String ugovorenaVrednost) {
 		this.ugovorenaVrednost = ugovorenaVrednost;
 	}
-	
+
 	public String getDatumZakljucenja() {
 		return datumZakljucenja;
 	}

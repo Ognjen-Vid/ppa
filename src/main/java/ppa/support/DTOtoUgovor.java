@@ -44,7 +44,7 @@ public class DTOtoUgovor implements Converter<UgovorDTO, Ugovor>{
 			e.printStackTrace();
 		}
 		ugovor.setNabavka(nabavkaService.findOne(dto.getNabavkaId()));
-		ugovor.setUgovorenaVrednost(dto.getUgovorenaVrednost());
+		ugovor.setUgovorenaVrednost(Integer.parseInt(dto.getUgovorenaVrednost()));
 		return ugovor;
 	}
 

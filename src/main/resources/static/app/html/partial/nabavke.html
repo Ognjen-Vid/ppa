@@ -18,7 +18,7 @@
 			</div>
 			<div class="form-group">
 				<label for="procenjenaVrednost">Procenjena vrednost</label>
-				<input class="form-control" id="procenjenaVrednost " type="text" ng-model="novaNabavka.procenjenaVrednost">
+				<input class="form-control" id="procenjenaVrednost " type=text ng-model="novaNabavka.procenjenaVrednost">
 			</div>
 			<div class="form-group">
 				<label for="vrstaPostupkaId">Vrsta postupka</label>
@@ -33,7 +33,7 @@
 				</select>
 			</div>
 			<button class="pull-right btn btn-primary" ng-click="save()">
-				<span class="glyphicon glyphicon-floppy-save"></span>Save
+				<span class="glyphicon glyphicon-floppy-save"></span>Sačuvaj
 			</button>
 		</form>
 	</div>
@@ -47,11 +47,11 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="procenjenaVrednostMin">Procenjena vrednost Min</label>
+					<label for="procenjenaVrednostMin">Procenjena vrednost MIN</label>
 					<input class="form-control" id="procenjenaVrednostMin" type="text" ng-model="trazenaNabavka.procenjenaVrednostMin" ng-change="search()">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="procenjenaVrednostMax">Procenjena vrednost Max</label>
+					<label for="procenjenaVrednostMax">Procenjena vrednost MAX</label>
 					<input class="form-control" id="procenjenaVrednostMax" type="text" ng-model="trazenaNabavka.procenjenaVrednostMax" ng-change="search()">
 				</div>
 			</div>
@@ -72,10 +72,10 @@
 
 	<div class="pull-right container-fluid">
 		<button class="btn btn-primary" ng-click="prev()" ng-disabled="pageNum == 0">
-			<span class="glyphicon glyphicon-chevron-left"></span>Prev
+			<span class="glyphicon glyphicon-chevron-left"></span>Prethodna
 		</button>
 		<button class="btn btn-primary" ng-click="next()" ng-disabled="pageNum == totalPages-1">
-			Next<span class="glyphicon glyphicon-chevron-right"></span>
+			Sledeća<span class="glyphicon glyphicon-chevron-right"></span>
 		</button>
 	</div>
 
@@ -88,7 +88,7 @@
 					<th>Vrsta postupka</th>
 					<th>Vrsta predmeta</th>
 					<th>Ugovori nabavke</th>
-					<th>Actions</th>
+					<th>Akcije</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -104,10 +104,10 @@
 					</td>
 					<td>
 						<button class="btn btn-warning" ng-click="editHere(n.id)">
-							<span class="glyphicon glyphicon-pencil"></span>Edit Here
+							<span class="glyphicon glyphicon-pencil"></span>Izmeni ovde
 						</button>
 						<button class="btn btn-danger" ng-click="delete(n.id)">
-							<span class="glyphicon glyphicon-trash"></span>Delete
+							<span class="glyphicon glyphicon-trash"></span>Obriši
 						</button> 
 					</td>
 				</tr>

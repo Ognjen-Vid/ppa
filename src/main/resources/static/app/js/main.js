@@ -390,6 +390,7 @@ app.controller("dobavljaciCtrl", function($scope, $location, $http, $routeParams
 
 	// CHANGE VIEW Method
 	$scope.option = "Pretraga";
+	$scope.optionText = "Unos novog dobavljača";
 	$scope.iconClass = "glyphicon glyphicon-search";
 	$scope.show = true;
 
@@ -398,12 +399,14 @@ app.controller("dobavljaciCtrl", function($scope, $location, $http, $routeParams
 		if(!$scope.show) {
 			$scope.option = "Unos";
 			$scope.iconClass = "glyphicon glyphicon-plus";
+			$scope.optionText = "Pretraga dobavljača";
 		} else {
 			$scope.option = "Pretraga";
 			$scope.iconClass = "glyphicon glyphicon-search";
+			$scope.optionText = "Unos novog dobavljača";
 		}
 	}
-
+	
 	$scope.search = function(){
 		$scope.pageNum = 0;
 		getDobavljaci();
@@ -626,6 +629,7 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 
 	// CHANGE VIEW Method
 	$scope.option = "Pretraga";
+	$scope.optionText = "Unos novog ugovora";
 	$scope.iconClass = "glyphicon glyphicon-search";
 	$scope.show = true;
 
@@ -634,9 +638,11 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 		if(!$scope.show) {
 			$scope.option = "Unos";
 			$scope.iconClass = "glyphicon glyphicon-plus";
+			$scope.optionText = "Pretraga ugovora";
 		} else {
 			$scope.option = "Pretraga";
 			$scope.iconClass = "glyphicon glyphicon-search";
+			$scope.optionText = "Unos novog ugovora";
 		}
 	}
 

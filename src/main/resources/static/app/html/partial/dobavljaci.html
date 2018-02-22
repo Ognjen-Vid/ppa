@@ -2,7 +2,7 @@
 
 	<div class="page-header" style="margin-top: 20p">
 		<h3>
-			Dobavljaci <span class="badge">{{totalDobavljaci}}</span>
+			Dobavljači <span class="badge">{{totalDobavljaci}}</span>
 		</h3>
 		<button class="btn btn-success" ng-click="changeView()">
 			<span class="{{iconClass}}"></span>{{option}}
@@ -11,26 +11,28 @@
 
 	<div id="saveEntity" class="container-fluid" ng-show="show">
 		<form class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+			<legend>{{optionText}}</legend>
 			<div class="form-group">
 				<label for="naziv">Naziv</label>
 				<input class="form-control" id="naziv" type="text" ng-model="noviDobavljac.naziv">
 			</div>
 			<div class="form-group">
-				<label for="maticniBroj">Maticni broj</label>
+				<label for="maticniBroj">Matični broj</label>
 				<input class="form-control" id="maticniBroj "type="text" ng-model="noviDobavljac.maticniBroj">
 			</div>
-			<button class="pull-right btn btn-primary" ng-click="save()"><span class="glyphicon glyphicon-floppy-save"></span>Save</button>
+			<button class="pull-right btn btn-primary" ng-click="save()"><span class="glyphicon glyphicon-floppy-save"></span>Sačuvaj</button>
 		</form>
 	</div>
 	
 	<div id="searchEntity" class="container-fluid" ng-show="!show">
 		<form class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+			<legend>{{optionText}}</legend>
 			<div class="form-group">
 				<label for="naziv">Naziv</label>
 				<input class="form-control" id="naziv" type="text" ng-model="trazeniDobavljac.naziv" ng-change="search()">
 			</div>
 			<div class="form-group">
-				<label for="maticniBroj">Maticni broj</label>
+				<label for="maticniBroj">Matični broj</label>
 				<input class="form-control" id="maticniBroj" type="text" ng-model="trazeniDobavljac.maticniBroj" ng-change="search()">
 			</div>
 		</form>
@@ -46,8 +48,8 @@
 			<thead>
 				<tr>
 					<th>Naziv</th>
-					<th>Maticni broj</th>
-					<th>Ugovori dobavljaca</th>
+					<th>Matični broj</th>
+					<th>Ugovori dobavljača</th>
 					<th>Akcije</th>
 				</tr>
 			</thead>

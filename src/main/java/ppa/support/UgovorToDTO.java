@@ -23,7 +23,7 @@ public class UgovorToDTO implements Converter<Ugovor, UgovorDTO>{
 		dto.setInterniBroj(persisted.getInterniBroj());
 		dto.setNabavkaId(persisted.getNabavka().getId());
 		dto.setNabavkaOznaka(persisted.getNabavka().getOznaka());
-		dto.setUgovorenaVrednost(persisted.getUgovorenaVrednost());
+		dto.setUgovorenaVrednost(String.format("%,9d", persisted.getUgovorenaVrednost()));
 		dto.setDatumZakljucenja(new SimpleDateFormat("dd-MM-yyyy").format(persisted.getDatumZakljucenja()));
 		return dto;
 	}

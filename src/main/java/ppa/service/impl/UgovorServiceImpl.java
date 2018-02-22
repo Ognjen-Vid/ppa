@@ -1,5 +1,7 @@
 package ppa.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -51,7 +53,7 @@ public class UgovorServiceImpl implements UgovorService {
 
 	@Override
 	public Page<Ugovor> findAll(String interniBroj, String dobavljacNaziv, String dobavljacMaticniBroj,
-			Integer ugovorenaVrednostMin, Integer ugovorenaVrednostMax, 
+			Integer ugovorenaVrednostMin, Integer ugovorenaVrednostMax, Date datumZakljucenjaOd, Date datumZakljucenjaDo,
 			Long nabavkaId, Long vrstaPostupkaId, Long vrstaPredmetaId, int pageNum) {
 		
 		if(interniBroj != null)
@@ -62,7 +64,7 @@ public class UgovorServiceImpl implements UgovorService {
 			dobavljacMaticniBroj = "%" + dobavljacMaticniBroj + "%";
 		
 		return ugovorRepo.findAll(interniBroj, dobavljacNaziv, dobavljacMaticniBroj,
-				ugovorenaVrednostMin, ugovorenaVrednostMax, nabavkaId, vrstaPostupkaId,
+				ugovorenaVrednostMin, ugovorenaVrednostMax, datumZakljucenjaOd, datumZakljucenjaDo, nabavkaId, vrstaPostupkaId,
 				vrstaPredmetaId, new PageRequest(pageNum, 5));
 	}
 

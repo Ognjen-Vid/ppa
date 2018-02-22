@@ -484,6 +484,12 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 		if($scope.trazeniUgovor.ugovorenaVrednostMax != "") {
 			config.params.ugovorenaVrednostMax = $scope.trazeniUgovor.ugovorenaVrednostMax;
 		}
+		if($scope.trazeniUgovor.datumZakljucenjaOd != "") {
+			config.params.datumZakljucenjaOd = $scope.trazeniUgovor.datumZakljucenjaOd;
+		}
+		if($scope.trazeniUgovor.datumZakljucenjaDo != "") {
+			config.params.datumZakljucenjaDo = $scope.trazeniUgovor.datumZakljucenjaDo;
+		}
 		if($scope.trazeniUgovor.nabavkaId != "") {
 			config.params.nabavkaId = $scope.trazeniUgovor.nabavkaId;
 		}
@@ -557,10 +563,12 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 
 	$scope.save = function(){
 		if($scope.noviUgovor.id == null) {
+			console.log($scope.noviUgovor.datumZakljucenja);
 			var promise = $http.post(URLugovori, $scope.noviUgovor);
 			promise.then(
 					function success(response){
 						getUgovori();
+						alert("Uspesno ste dodatli ugovor!");
 						$scope.noviUgovor = null;
 					},
 					function error(response){

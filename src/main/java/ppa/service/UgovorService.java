@@ -1,5 +1,7 @@
 package ppa.service;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 
 import ppa.model.Ugovor;
@@ -13,7 +15,9 @@ public interface UgovorService {
 			String dobavljacNaziv, 
 			String dobavljacMaticniBroj,
 			Integer ugovorenaVrednostMin, 
-			Integer ugovorenaVrednostMax, 
+			Integer ugovorenaVrednostMax,
+			Date datumZakljucenjaOd,
+			Date datumZakljucenjaDo,
 			Long nabavkaId, 
 			Long vrstaPostupkaId,
 			Long vrstaPredmetaId,

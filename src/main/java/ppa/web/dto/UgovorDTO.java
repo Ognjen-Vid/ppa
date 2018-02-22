@@ -1,13 +1,11 @@
 package ppa.web.dto;
 
-import java.util.Date;
-
 public class UgovorDTO {
 
 	Long id;
 	String interniBroj;
 	int ugovorenaVrednost;
-	Date datumZakljucenja;
+	String datumZakljucenja;
 	
 	Long nabavkaId;
 	String nabavkaOznaka;
@@ -48,11 +46,11 @@ public class UgovorDTO {
 		this.ugovorenaVrednost = ugovorenaVrednost;
 	}
 	
-	public Date getDatumZakljucenja() {
+	public String getDatumZakljucenja() {
 		return datumZakljucenja;
 	}
 
-	public void setDatumZakljucenja(Date datumZakljucenja) {
+	public void setDatumZakljucenja(String datumZakljucenja) {
 		this.datumZakljucenja = datumZakljucenja;
 	}
 

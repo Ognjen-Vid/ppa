@@ -1,5 +1,8 @@
 package ppa.support;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -35,7 +38,11 @@ public class DTOtoUgovor implements Converter<UgovorDTO, Ugovor>{
 		}
 		ugovor.setDobavljac(dobavljacService.findByMaticniBroj(dto.getDobavljacMaticniBroj(), dto.getDobavljacNaziv()));
 		ugovor.setInterniBroj(dto.getInterniBroj());
-		ugovor.setDatumZakljucenja(dto.getDatumZakljucenja());
+		try {
+			ugovor.setDatumZakljucenja(new SimpleDateFormat("yyyy-MM-dd").parse(dto.getDatumZakljucenja()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		ugovor.setNabavka(nabavkaService.findOne(dto.getNabavkaId()));
 		ugovor.setUgovorenaVrednost(dto.getUgovorenaVrednost());
 		return ugovor;

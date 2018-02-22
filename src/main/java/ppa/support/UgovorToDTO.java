@@ -1,5 +1,6 @@
 package ppa.support;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class UgovorToDTO implements Converter<Ugovor, UgovorDTO>{
 		dto.setNabavkaId(persisted.getNabavka().getId());
 		dto.setNabavkaOznaka(persisted.getNabavka().getOznaka());
 		dto.setUgovorenaVrednost(persisted.getUgovorenaVrednost());
-		dto.setDatumZakljucenja(persisted.getDatumZakljucenja());
+		dto.setDatumZakljucenja(new SimpleDateFormat("dd-MM-yyyy").format(persisted.getDatumZakljucenja()));
 		return dto;
 	}
 	

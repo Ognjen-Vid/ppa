@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,8 @@ public class UgovorController {
 			@RequestParam(required = false) String dobavljacMaticniBroj,
 			@RequestParam(required = false) Integer ugovorenaVrednostMin, 
 			@RequestParam(required = false) Integer ugovorenaVrednostMax,
-			@RequestParam(required = false) Date datumZakljucenjaOd,
-			@RequestParam(required = false) Date datumZakljucenjaDo,
+			@RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date datumZakljucenjaOd,
+			@RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date datumZakljucenjaDo,
 			@RequestParam(required = false) Long nabavkaId,
 			@RequestParam(required = false) Long vrstaPostupkaId,
 			@RequestParam(required = false) Long vrstaPredmetaId,
@@ -57,6 +58,8 @@ public class UgovorController {
 				|| (dobavljacMaticniBroj != null && !dobavljacMaticniBroj.trim().isEmpty() && dobavljacMaticniBroj != "")
 				|| ugovorenaVrednostMin != null
 				|| ugovorenaVrednostMax != null
+				|| datumZakljucenjaOd != null
+				|| datumZakljucenjaDo != null
 				|| nabavkaId != null
 				|| vrstaPostupkaId != null
 				|| vrstaPredmetaId != null) {
@@ -67,6 +70,8 @@ public class UgovorController {
 					dobavljacMaticniBroj, 
 					ugovorenaVrednostMin, 
 					ugovorenaVrednostMax,
+					datumZakljucenjaOd,
+					datumZakljucenjaDo,
 					nabavkaId,
 					vrstaPostupkaId,
 					vrstaPredmetaId,

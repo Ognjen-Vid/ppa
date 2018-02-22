@@ -21,7 +21,7 @@
 			</div>
 			<div class="form-group">
 				<label for="datumZakljucenja">Datum zaključenja</label>
-				<input class="form-control" id="datumZakljucenja " type="date" ng-model="noviUgovor.datumZakljucenja">
+				<input class="form-control" id="datumZakljucenja " type="date" ng-model="noviUgovor.datumZakljucenja" ng-model-options="{timezone:'UTC'}">
 			</div>
 			<div class="form-group">
 				<label for="nabavkaId">Oznaka nabavke</label>
@@ -63,12 +63,12 @@
 				<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="datumZakljucenjaOd">Datum Zaključenja Od</label>
-					<input class="form-control" id="datumZakljucenjaOd" type="text"
+					<input class="form-control" id="datumZakljucenjaOd" type="date"
 						ng-model="trazeniUgovor.datumZakljucenjaOd" ng-change="search()">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="datumZakljucenjaDo">Datum Zaključenja Do</label>
-					<input class="form-control" id="datumZakljucenjaDo" type="text"
+					<input class="form-control" id="datumZakljucenjaDo" type="date"
 						ng-model="trazeniUgovor.datumZakljucenjaDo" ng-change="search()">
 				</div>
 			</div>

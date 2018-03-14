@@ -1,5 +1,8 @@
 package ppa.support;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -45,6 +48,11 @@ public class DTOtoNabavka implements Converter<NabavkaDTO, Nabavka>{
 		nabavka.setProcenjenaVrednost(source.getProcenjenaVrednost());
 		nabavka.setVrstaPostupka(vrstaPostupkaService.findOne(source.getVrstaPostupkaId()));
 		nabavka.setVrstaPredmeta(vrstaPredmetaService.findOne(source.getVrstaPredmetaId()));
+		try {
+			nabavka.setDatumOtvaranja(new SimpleDateFormat("yyyy-MM-dd").parse(source.getDatumOtvaranja()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return nabavka;
 	}
 }

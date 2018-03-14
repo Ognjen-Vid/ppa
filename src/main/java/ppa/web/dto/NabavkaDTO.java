@@ -5,6 +5,7 @@ public class NabavkaDTO {
 	Long id;
 	String oznaka;
 	int procenjenaVrednost;
+	String datumOtvaranja;
 	
 	Long vrstaPostupkaId;
 	String vrstaPostupkaNaziv;
@@ -54,5 +55,11 @@ public class NabavkaDTO {
 	public Long getVrstaPredmetaId() {
 		return vrstaPredmetaId;
 	}
-	
+	public String getDatumOtvaranja() {
+		return datumOtvaranja;
+	}
+	public void setDatumOtvaranja(String datumOtvaranja) {
+		this.datumOtvaranja = datumOtvaranja;
+	}
+		
 }

@@ -77,6 +77,7 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 	$scope.novaNabavka.procenjenaVrednost = "";
 	$scope.novaNabavka.vrstaPostupkaId = "";
 	$scope.novaNabavka.vrstaPredmetaId = "";
+	$scope.novaNabavka.datumOtvaranja = "";
 
 	$scope.trazenaNabavka = {};
 	$scope.trazenaNabavka.oznaka = "";

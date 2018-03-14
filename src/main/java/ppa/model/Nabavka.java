@@ -1,6 +1,7 @@
 package ppa.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -17,6 +18,8 @@ public class Nabavka {
 	String oznaka;
 	@Column
 	int procenjenaVrednost;
+	@Temporal(TemporalType.DATE)
+	Date datumOtvaranja;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	VrstaPostupka vrstaPostupka;
@@ -87,6 +90,14 @@ public class Nabavka {
 
 	public void setUgovori(List<Ugovor> ugovori) {
 		this.ugovori = ugovori;
+	}
+
+	public Date getDatumOtvaranja() {
+		return datumOtvaranja;
+	}
+
+	public void setDatumOtvaranja(Date datumOtvaranja) {
+		this.datumOtvaranja = datumOtvaranja;
 	}
 
 }

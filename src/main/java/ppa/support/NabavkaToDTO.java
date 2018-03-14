@@ -1,5 +1,6 @@
 package ppa.support;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.core.convert.converter.Converter;
@@ -21,7 +22,7 @@ public class NabavkaToDTO implements Converter<Nabavka, NabavkaDTO>{
 		dto.setVrstaPostupkaNaziv(persisted.getVrstaPostupka().getNaziv());
 		dto.setVrstaPredmetaId(persisted.getVrstaPredmeta().getId());
 		dto.setVrstaPredmetaNaziv(persisted.getVrstaPredmeta().getNaziv());
-		
+		dto.setDatumOtvaranja(new SimpleDateFormat("dd-MM-yyyy").format(persisted.getDatumOtvaranja()));
 		return dto;
 	}
 	

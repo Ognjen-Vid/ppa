@@ -11,9 +11,9 @@ INSERT INTO vrsta_predmeta (naziv) VALUES
 ("Usluge"),
 ("Radovi");
 
-INSERT INTO nabavka (oznaka, procenjena_vrednost, vrsta_postupka_id, vrsta_predmeta_id) VALUES
-("01-18-O", 1000000 , 1, 1),
-("02-18-O", 1000000 , 1, 1);
+INSERT INTO nabavka (datum_otvaranja, oznaka, procenjena_vrednost, vrsta_postupka_id, vrsta_predmeta_id) VALUES
+(20180314, "01-18-O", 1000000 , 1, 1),
+(20180314, "02-18-O", 1000000 , 1, 1);
 
 INSERT INTO ugovor (interni_broj, ugovorena_vrednost, datum_zakljucenja, dobavljac_id, nabavka_id) VALUES
 ("3/11", 500000, 20180201, 1, 1),

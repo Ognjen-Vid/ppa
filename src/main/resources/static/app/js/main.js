@@ -158,34 +158,47 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 	getVrstePostupka();
 	getVrstePredmeta();
 
-	$scope.save = function(){
-		if($scope.novaNabavka.id == null) {
-			var promise = $http.post(URLnabavke, $scope.novaNabavka);
-			promise.then(
-					function success(response){
-						getNabavke();
-						$scope.novaNabavka = null;
-					},
-					function error(response){
-						alert("Greska pri dodavanju nabavke!");
-						console.log(response.data);
-					}
-			);
-		} else {
-			var promise = $http.put(URLnabavke + "/" + $scope.novaNabavka.id, $scope.novaNabavka);
-			promise.then(
-					function success(response){
-						alert("Uspesno ste izmenili nabavku!");
-						getNabavke();
-						$scope.novaNabavka = null;
-					},
-					function error(response){
-						alert("Nije moguce izmeniti nabavku!");
-						console.log(response.data);
-					}
-			);
+	var postojiOznaka = function() {
+		for (var i = 0; i < $scope.nabavke.length; i++) {
+			if($scope.nabavke[i].oznaka === $scope.novaNabavka.oznaka) {
+				return true;
+			}
 		}
+		return false;
+	};
 
+	$scope.save = function(){
+		if(!postojiOznaka()) {
+			if($scope.novaNabavka.id == null) {
+				var promise = $http.post(URLnabavke, $scope.novaNabavka);
+				promise.then(
+						function success(response){
+							alert("Uspesno ste dodali nabavku!");
+							getNabavke();
+							$scope.novaNabavka = null;
+						},
+						function error(response){
+							alert("Greska pri dodavanju nabavke!");
+							console.log(response.data);
+						}
+				);
+			} else {
+				var promise = $http.put(URLnabavke + "/" + $scope.novaNabavka.id, $scope.novaNabavka);
+				promise.then(
+						function success(response){
+							alert("Uspesno ste izmenili nabavku!");
+							getNabavke();
+							$scope.novaNabavka = null;
+						},
+						function error(response){
+							alert("Nije moguce izmeniti nabavku!");
+							console.log(response.data);
+						}
+				);
+			}
+		} else {
+			alert("Oznaka nabavke već postoji");
+		}
 	};
 
 	$scope.editHere = function(id) {

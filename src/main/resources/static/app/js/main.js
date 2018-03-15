@@ -168,37 +168,42 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 	};
 
 	$scope.save = function(){
-		if(!postojiOznaka()) {
-			if($scope.novaNabavka.id == null) {
+		if($scope.novaNabavka.id == null) {
+			if(!postojiOznaka()) {
 				var promise = $http.post(URLnabavke, $scope.novaNabavka);
 				promise.then(
-						function success(response){
-							alert("Uspesno ste dodali nabavku!");
-							getNabavke();
-							$scope.novaNabavka = null;
-						},
-						function error(response){
-							alert("Greska pri dodavanju nabavke!");
-							console.log(response.data);
-						}
+					function success(response){
+						alert("Uspesno ste dodali nabavku!");
+						getNabavke();
+						$scope.novaNabavka = null;
+					},
+					function error(response){
+						alert("Greska pri dodavanju nabavke!");
+						console.log(response.data);
+					}
 				);
 			} else {
-				var promise = $http.put(URLnabavke + "/" + $scope.novaNabavka.id, $scope.novaNabavka);
-				promise.then(
-						function success(response){
-							alert("Uspesno ste izmenili nabavku!");
-							getNabavke();
-							$scope.novaNabavka = null;
-						},
-						function error(response){
-							alert("Nije moguce izmeniti nabavku!");
-							console.log(response.data);
-						}
-				);
+				alert("Oznaka nabavke postoji!");
 			}
 		} else {
-			alert("Oznaka nabavke već postoji");
+			if(!postojiOznaka()) {
+				var promise = $http.put(URLnabavke + "/" + $scope.novaNabavka.id, $scope.novaNabavka);
+				promise.then(
+					function success(response){
+						alert("Uspesno ste izmenili nabavku!");
+						getNabavke();
+						$scope.novaNabavka = null;
+					},
+					function error(response){
+						alert("Nije moguce izmeniti nabavku!");
+						console.log(response.data);
+					}
+				);
+			} else {
+				alert("Oznaka nabavke postoji!");
+			}
 		}
+
 	};
 
 	$scope.editHere = function(id) {
@@ -207,6 +212,7 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 		promise.then(
 				function success(response){
 					$scope.novaNabavka = response.data;
+					$scope.novaNabavka.datumOtvaranja = new Date($scope.novaNabavka.datumOtvaranja);
 				},
 				function error(response){
 					alert("Nije moguce dobaviti nabavku za izmenu!");
@@ -616,6 +622,7 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 		promise.then(
 				function success(response){
 					$scope.noviUgovor = response.data;
+					$scope.noviUgovor.datumZakljucenja = new Date($scope.noviUgovor.datumZakljucenja);
 				},
 				function error(response){
 					alert("Nije moguce dobaviti ugovor za izmenu!");

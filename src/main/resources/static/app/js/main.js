@@ -46,17 +46,6 @@ app.service("DataShare", function(){
 		getId: getId
 	};
 
-//	this.id = "";
-
-//	this.addId = function(nId) {
-//	id = nId;
-//	};
-
-//	this.getId = function(){
-//	return id;
-//	};
-
-
 });
 
 //==============================================================================================

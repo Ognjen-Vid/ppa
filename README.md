@@ -9,7 +9,7 @@ Potrebno je da bude kreirana schema **ppa**
 - username: root
 - password: root
 
-----------------------------------------------------
+```SQL
 DROP DATABASE IF EXISTS ppa;
 CREATE DATABASE ppa DEFAULT CHARACTER SET utf8;
 
@@ -18,7 +18,7 @@ USE ppa;
 GRANT ALL ON ppa.* TO 'ppa'@'%' IDENTIFIED BY 'ppa';
 
 FLUSH PRIVILEGES;
-----------------------------------------------------
+```
 
 Importovati kao maven project.
 

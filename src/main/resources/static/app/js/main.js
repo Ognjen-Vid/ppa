@@ -32,15 +32,6 @@ app.config(["$routeProvider", function($routeProvider) {
 
 app.service("DataShare", function(){
 	var id = "";
-//	var oznaka = "";
-//
-//	var addOznaka = function(nOznaka) {
-//		oznaka = nOznaka;
-//	};
-//
-//	var getOznaka= function(){
-//		return oznaka;
-//	};
 	
 	var addId = function(nId) {
 		id = nId;
@@ -51,8 +42,25 @@ app.service("DataShare", function(){
 	};
 
 	return {addId: addId, getId: getId};
-//	addOznaka: addOznaka, getOznaka: getOznaka
 
+});
+
+app.service('CRUDService', function($http) {
+	
+	this.getLista = function(url, scope) {
+		var promise = $http.get(url);
+		promise.then(
+				function success(response){
+					scope = response.data;
+					console.log("Ispis iz servisa");
+					console.log(scope);
+				},
+				function error(response){
+					console.log(response.data);
+				}
+		);
+	};
+	
 });
 
 app.run(function($rootScope) {
@@ -64,7 +72,7 @@ app.run(function($rootScope) {
 //==============================================================================================
 //								NABAVKE CONTROLLER
 //==============================================================================================
-app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, DataShare, $rootScope){
+app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, DataShare, $rootScope, CRUDService){
 
 	var URLnabavke = "/api/nabavke";
 	var URLvrstePostupka = "/api/vrstePostupka";
@@ -132,7 +140,10 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 		);
 	};
 
-	var getVrstePostupka = function(){
+	var getVrstePostupka = function () {
+//		CRUDService.getLista(URLvrstePostupka, $scope.vrstePostupka);
+//	};
+	
 		var promise = $http.get(URLvrstePostupka);
 		promise.then(
 				function success(response){
@@ -145,16 +156,21 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 	};
 
 	var getVrstePredmeta = function(){
-		var promise = $http.get(URLvrstePredmeta);
-		promise.then(
-				function success(response){
-					$scope.vrstePredmeta = response.data;
-				},
-				function error(response){
-					console.log(response.data);
-				}
-		);
+		console.log("Ispis pre servisa");
+		console.log($scope.vrstePredmeta);
+		CRUDService.getLista(URLvrstePredmeta, $scope.vrstePredmeta);
+		console.log($scope.vrstePredmeta);
 	};
+//		var promise = $http.get(URLvrstePredmeta);
+//		promise.then(
+//				function success(response){
+//					$scope.vrstePredmeta = response.data;
+//				},
+//				function error(response){
+//					console.log(response.data);
+//				}
+//		);
+//	};
 
 	getNabavke();
 	getVrstePostupka();

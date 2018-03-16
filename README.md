@@ -24,4 +24,4 @@ Importovati kao maven project.
 
 
 # TO-DO: 
-1. Dodati proveru postojanja oznake nabavke, internog broja ugovora i maticnog broja dobavljaca, prilikom unosa novog entiteta.
+1. Napraviti custom servis koji ce enkapsulirati CRUD preko REST servisa.

@@ -32,7 +32,16 @@ app.config(["$routeProvider", function($routeProvider) {
 
 app.service("DataShare", function(){
 	var id = "";
-
+//	var oznaka = "";
+//
+//	var addOznaka = function(nOznaka) {
+//		oznaka = nOznaka;
+//	};
+//
+//	var getOznaka= function(){
+//		return oznaka;
+//	};
+	
 	var addId = function(nId) {
 		id = nId;
 	};
@@ -41,17 +50,21 @@ app.service("DataShare", function(){
 		return id;
 	};
 
-	return {
-		addId: addId,
-		getId: getId
-	};
+	return {addId: addId, getId: getId};
+//	addOznaka: addOznaka, getOznaka: getOznaka
 
+});
+
+app.run(function($rootScope) {
+    $rootScope.oznaka = "";
+    $rootScope.interniBroj = "";
+    $rootScope.maticniBroj = "";
 });
 
 //==============================================================================================
 //								NABAVKE CONTROLLER
 //==============================================================================================
-app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, DataShare){
+app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, DataShare, $rootScope){
 
 	var URLnabavke = "/api/nabavke";
 	var URLvrstePostupka = "/api/vrstePostupka";
@@ -175,7 +188,7 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 				alert("Oznaka nabavke postoji!");
 			}
 		} else {
-			if(!postojiOznaka()) {
+			if($scope.novaNabavka.oznaka === $rootScope.oznaka) {
 				var promise = $http.put(URLnabavke + "/" + $scope.novaNabavka.id, $scope.novaNabavka);
 				promise.then(
 					function success(response){
@@ -189,7 +202,22 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 					}
 				);
 			} else {
-				alert("Oznaka nabavke postoji!");
+				if(!postojiOznaka()) {
+					var promise = $http.put(URLnabavke + "/" + $scope.novaNabavka.id, $scope.novaNabavka);
+					promise.then(
+						function success(response){
+							alert("Uspesno ste izmenili nabavku!");
+							getNabavke();
+							$scope.novaNabavka = null;
+						},
+						function error(response){
+							alert("Nije moguce izmeniti nabavku!");
+							console.log(response.data);
+						}
+					);
+				} else {
+					alert("Oznaka nabavke postoji!");
+				}
 			}
 		}
 
@@ -201,7 +229,8 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 		promise.then(
 				function success(response){
 					$scope.novaNabavka = response.data;
-					$scope.novaNabavka.datumOtvaranja = new Date($scope.novaNabavka.datumOtvaranja);
+//					$scope.novaNabavka.datumOtvaranja = new Date($scope.novaNabavka.datumOtvaranja);
+					$rootScope.oznaka = response.data.oznaka;
 				},
 				function error(response){
 					alert("Nije moguce dobaviti nabavku za izmenu!");
@@ -280,7 +309,7 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 //==============================================================================================
 //								DOBAVLJACI CONTROLLER
 //==============================================================================================
-app.controller("dobavljaciCtrl", function($scope, $location, $http, $routeParams, DataShare){
+app.controller("dobavljaciCtrl", function($scope, $location, $http, $routeParams, DataShare, $rootScope){
 
 	var URLdobavljaci = "/api/dobavljaci";
 
@@ -330,35 +359,67 @@ app.controller("dobavljaciCtrl", function($scope, $location, $http, $routeParams
 	};
 
 	getDobavljaci();
+	
+	var postojiMaticniBroj = function() {
+		for (var i = 0; i < $scope.dobavljaci.length; i++) {
+			if($scope.dobavljaci[i].maticniBroj === $scope.noviDobavljac.maticniBroj) {
+				return true;
+			}
+		}
+		return false;
+	};
 
 	$scope.save = function(){
 		if($scope.noviDobavljac.id == null) {
-			var promise = $http.post(URLdobavljaci, $scope.noviDobavljac);
-			promise.then(
-					function success(response){
-						getDobavljaci();
-						$scope.noviDobavljac = null;
-					},
-					function error(response){
-						alert("Greska pri dodavanju dobavljaca!");
-						console.log(response.data);
-					}
-			);
+			if(!postojiMaticniBroj()){
+				var promise = $http.post(URLdobavljaci, $scope.noviDobavljac);
+				promise.then(
+						function success(response){
+							getDobavljaci();
+							alert("Uspesno ste dodatli dobavljača!");
+							$scope.noviDobavljac = null;
+						},
+						function error(response){
+							alert("Greska pri dodavanju dobavljaca!");
+							console.log(response.data);
+						}
+				);
+			} else {
+				alert("Matični broj već postoji!");
+			}
 		} else {
-			var promise = $http.put(URLdobavljaci + "/" + $scope.noviDobavljac.id, $scope.noviDobavljac);
-			promise.then(
-					function success(response){
-						alert("Uspesno ste izmenili dobavljaca!");
-						getDobavljaci();
-						$scope.noviDobavljac = null;
-					},
-					function error(response){
-						alert("Nije moguce izmeniti ldobavljacaub!");
-						console.log(response.data);
-					}
-			);
+			if($scope.noviDobavljac.maticniBroj === $rootScope.maticniBroj){
+				var promise = $http.put(URLdobavljaci + "/" + $scope.noviDobavljac.id, $scope.noviDobavljac);
+				promise.then(
+						function success(response){
+							alert("Uspesno ste izmenili dobavljaca!");
+							getDobavljaci();
+							$scope.noviDobavljac = null;
+						},
+						function error(response){
+							alert("Nije moguce izmeniti ldobavljacaub!");
+							console.log(response.data);
+						}
+				);
+			} else {
+				if(!postojiMaticniBroj()){
+					var promise = $http.put(URLdobavljaci + "/" + $scope.noviDobavljac.id, $scope.noviDobavljac);
+					promise.then(
+							function success(response){
+								alert("Uspesno ste izmenili dobavljaca!");
+								getDobavljaci();
+								$scope.noviDobavljac = null;
+							},
+							function error(response){
+								alert("Nije moguce izmeniti ldobavljacaub!");
+								console.log(response.data);
+							}
+					);
+				}else{
+					alert("Matični broj već postoji!");
+				}
+			}
 		}
-
 	};
 
 	$scope.editHere = function(id) {
@@ -367,6 +428,7 @@ app.controller("dobavljaciCtrl", function($scope, $location, $http, $routeParams
 		promise.then(
 				function success(response){
 					$scope.noviDobavljac = response.data;
+					$rootScope.maticniBroj = response.data.maticniBroj;
 				},
 				function error(response){
 					alert("Nije moguce dobaviti dobavljaca za izmenu!");
@@ -443,7 +505,7 @@ app.controller("dobavljaciCtrl", function($scope, $location, $http, $routeParams
 //==============================================================================================
 //								UGOVORI CONTROLLER
 //==============================================================================================
-app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, DataShare){
+app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, DataShare, $rootScope){
 
 	var URLugovori = "/api/ugovori";
 	var URLnabavke = "/api/nabavke";
@@ -573,36 +635,66 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 	getVrstePostupka();
 	getVrstePredmeta();
 
+	var postojiInterniBroj = function() {
+		for (var i = 0; i < $scope.ugovori.length; i++) {
+			if($scope.ugovori[i].interniBroj === $scope.noviUgovor.interniBroj) {
+				return true;
+			}
+		}
+		return false;
+	};
+	
 	$scope.save = function(){
 		if($scope.noviUgovor.id == null) {
-			console.log($scope.noviUgovor.datumZakljucenja);
-			var promise = $http.post(URLugovori, $scope.noviUgovor);
-			promise.then(
-					function success(response){
-						getUgovori();
-						alert("Uspesno ste dodatli ugovor!");
-						$scope.noviUgovor = null;
-					},
-					function error(response){
-						alert("Greska pri dodavanju ugovora!");
-						console.log(response.data);
-					}
-			);
+			if(!postojiInterniBroj()){
+				var promise = $http.post(URLugovori, $scope.noviUgovor);
+				promise.then(
+						function success(response){
+							getUgovori();
+							alert("Uspesno ste dodali ugovor!");
+							$scope.noviUgovor = null;
+						},
+						function error(response){
+							alert("Greska pri dodavanju ugovora!");
+							console.log(response.data);
+						}
+				);
+			} else {
+				alert("Interni broj već postoji!");
+			}
 		} else {
-			var promise = $http.put(URLugovori + "/" + $scope.noviUgovor.id, $scope.noviUgovor);
-			promise.then(
-					function success(response){
-						alert("Uspesno ste izmenili ugovor!");
-						getUgovori();
-						$scope.noviUgovor = null;
-					},
-					function error(response){
-						alert("Nije moguce izmeniti ugovor!");
-						console.log(response.data);
-					}
-			);
+			if($scope.noviUgovor.interniBroj === $rootScope.interniBroj) {
+				var promise = $http.put(URLugovori + "/" + $scope.noviUgovor.id, $scope.noviUgovor);
+				promise.then(
+						function success(response){
+							alert("Uspesno ste izmenili ugovor!");
+							getUgovori();
+							$scope.noviUgovor = null;
+						},
+						function error(response){
+							alert("Nije moguce izmeniti ugovor!");
+							console.log(response.data);
+						}
+				);
+			} else {
+				if(!postojiInterniBroj()) {
+					var promise = $http.put(URLugovori + "/" + $scope.noviUgovor.id, $scope.noviUgovor);
+					promise.then(
+							function success(response){
+								alert("Uspesno ste izmenili ugovor!");
+								getUgovori();
+								$scope.noviUgovor = null;
+							},
+							function error(response){
+								alert("Nije moguce izmeniti ugovor!");
+								console.log(response.data);
+							}
+					);
+				} else {
+					alert("Interni broj već postoji!");
+				}
+			}
 		}
-
 	};
 
 	$scope.editHere = function(id) {
@@ -611,7 +703,8 @@ app.controller("ugovoriCtrl", function($scope, $location, $http, $routeParams, D
 		promise.then(
 				function success(response){
 					$scope.noviUgovor = response.data;
-					$scope.noviUgovor.datumZakljucenja = new Date($scope.noviUgovor.datumZakljucenja);
+//					$scope.noviUgovor.datumZakljucenja = new Date($scope.noviUgovor.datumZakljucenja);
+					$rootScope.interniBroj = response.data.interniBroj;
 				},
 				function error(response){
 					alert("Nije moguce dobaviti ugovor za izmenu!");

@@ -30,6 +30,7 @@ app.config(["$routeProvider", function($routeProvider) {
 }
 ]);
 
+//Data-share via service
 app.service("DataShare", function(){
 	var id = "";
 	
@@ -45,24 +46,7 @@ app.service("DataShare", function(){
 
 });
 
-app.service('CRUDService', function($http) {
-	
-	this.getLista = function(url, scope) {
-		var promise = $http.get(url);
-		promise.then(
-				function success(response){
-					scope = response.data;
-					console.log("Ispis iz servisa");
-					console.log(scope);
-				},
-				function error(response){
-					console.log(response.data);
-				}
-		);
-	};
-	
-});
-
+//Data-share via $rootScope
 app.run(function($rootScope) {
     $rootScope.oznaka = "";
     $rootScope.interniBroj = "";
@@ -72,7 +56,7 @@ app.run(function($rootScope) {
 //==============================================================================================
 //								NABAVKE CONTROLLER
 //==============================================================================================
-app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, DataShare, $rootScope, CRUDService){
+app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, DataShare, $rootScope){
 
 	var URLnabavke = "/api/nabavke";
 	var URLvrstePostupka = "/api/vrstePostupka";
@@ -105,7 +89,7 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 	//==============================================================================================
 	//	CRUD METODE
 	//==============================================================================================
-
+	
 	var getNabavke = function() {
 
 		var config = {params: {}};
@@ -141,9 +125,6 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 	};
 
 	var getVrstePostupka = function () {
-//		CRUDService.getLista(URLvrstePostupka, $scope.vrstePostupka);
-//	};
-	
 		var promise = $http.get(URLvrstePostupka);
 		promise.then(
 				function success(response){
@@ -156,21 +137,16 @@ app.controller("nabavkeCtrl", function($scope, $location, $http, $routeParams, D
 	};
 
 	var getVrstePredmeta = function(){
-		console.log("Ispis pre servisa");
-		console.log($scope.vrstePredmeta);
-		CRUDService.getLista(URLvrstePredmeta, $scope.vrstePredmeta);
-		console.log($scope.vrstePredmeta);
+		var promise = $http.get(URLvrstePredmeta);
+		promise.then(
+				function success(response){
+					$scope.vrstePredmeta = response.data;
+				},
+				function error(response){
+					console.log(response.data);
+				}
+		);
 	};
-//		var promise = $http.get(URLvrstePredmeta);
-//		promise.then(
-//				function success(response){
-//					$scope.vrstePredmeta = response.data;
-//				},
-//				function error(response){
-//					console.log(response.data);
-//				}
-//		);
-//	};
 
 	getNabavke();
 	getVrstePostupka();

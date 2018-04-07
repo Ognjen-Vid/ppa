@@ -7,7 +7,10 @@ var app = angular.module("ppa", ["ngRoute"]);
 app.config(["$routeProvider", function($routeProvider) {
 	$routeProvider
 	.when('/', {
-		templateUrl: '/app/html/partial/home.html'
+		templateUrl: '/app/html/partial/login.html'
+	})
+	.when('/pocetna', {
+		templateUrl: '/app/html/partial/pocetna.html'
 	})
 	.when('/dobavljaci', {
 		templateUrl: '/app/html/partial/dobavljaci.html'

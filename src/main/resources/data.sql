@@ -1,3 +1,6 @@
+INSERT INTO korisnik (korisnicko_ime, lozinka) VALUES 
+("Pera", "123");
+
 INSERT INTO dobavljac (naziv, maticni_broj) VALUES 
 ("Merck", "100001"),
 ("PharmaSwiss", "200002");

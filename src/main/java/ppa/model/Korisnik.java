@@ -1,7 +1,5 @@
 package ppa.model;
 
-import java.beans.Transient;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +18,7 @@ public class Korisnik {
 	private String korisnickoIme;
 	@Column
 	private String lozinka;
-	private String lozinkaProvera;
+	
 	public Long getId() {
 		return id;
 	}
@@ -38,12 +36,5 @@ public class Korisnik {
 	}
 	public void setLozinka(String lozinka) {
 		this.lozinka = lozinka;
-	}
-	@Transient
-	public String getLozinkaProvera() {
-		return lozinkaProvera;
-	}
-	public void setLozinkaProvera(String lozinkaProvera) {
-		this.lozinkaProvera = lozinkaProvera;
 	}
 }

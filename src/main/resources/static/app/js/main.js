@@ -989,3 +989,42 @@ app.controller("ugovoriDobavljacaCtrl", function($scope, $location, $http, $rout
 	};
 
 });
+
+//==============================================================================================
+//LOGIN CONTROLLER
+//==============================================================================================
+app.controller("loginCtrl", function($scope, $location, $http){
+
+	var URLlogin = "/api/login";
+
+	$scope.korisnik = {};
+	$scope.korisnik.korisnickoIme = "";
+	$scope.korisnik.lozinka = "";
+
+//	==============================================================================================
+//	CRUD METODE
+//	==============================================================================================
+
+	$scope.search = function() {
+
+		var config = {params: {}};
+
+		if($scope.korisnik.korisnickoIme != "") {
+			config.params.korisnickoIme = $scope.korisnik.korisnickoIme;
+		}
+		if($scope.korisnik.korisnickoIme != "") {
+			config.params.korisnickoIme = $scope.korisnik.korisnickoIme;
+		}
+
+		var promise = $http.get(URLlogin, config);
+		promise.then(
+				function success(response){
+					$location.path('/pocetna');
+				},
+				function error(response){
+					console.log(response.data);
+					$location.path('/login');
+				}
+		);
+	};
+});

@@ -1,19 +1,11 @@
-    <div class="container">
+    <div class="container" ng-controller="loginCtrl">
         <div class="card card-container">
-            <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin">
-                <!-- <span id="reauth-email" class="reauth-email"></span> -->
-                <input type="text" id="korisnickoIme" class="form-control" placeholder="Korisnicko ime" required autofocus>
-                <input type="password" id="lozinka" class="form-control" placeholder="Lozinka" required>
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Zapamti me
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Uloguj se</button>
+                <input type="text" id="korisnickoIme" class="form-control" ng-model="korisnik.korisnickoIme" placeholder="Korisnicko ime" required autofocus>
+                <input type="password" id="lozinka" class="form-control" ng-model="korisnik.lozinka" placeholder="Lozinka" required>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" ng-click="search()">
+               		Uloguj se
+                </button>
             </form><!-- /form -->
-            <a href="#" class="forgot-password">
-                Zaboravili ste lozinku?
-            </a>
         </div><!-- /card-container -->
     </div><!-- /container -->

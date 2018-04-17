@@ -56,21 +56,6 @@ body, html {
     min-height: 1em;
 }
 
-/*.reauth-email {
-    display: block;
-    color: #404040;
-    line-height: 2;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}*/
-
 .form-signin input[type=password],
 .form-signin input[type=text],
 .form-signin button {
@@ -123,4 +108,34 @@ body, html {
 .forgot-password:active,
 .forgot-password:focus{
     color: rgb(12, 97, 33);
+}
+
+@keyframes added {
+  from {
+    opacity: 0;
+    top: -500px;
+  }
+  to {
+    opacity: 1;
+    top: 0px;
+  }
+}
+ 
+@keyframes deleted {
+  from {
+    top: 0;
+    opacity: 1;
+  }
+  to {
+    top: 200px;
+    opacity: 0;
+  }
+}
+ 
+.task-item.ng-enter {
+  animation: 1s added;
+}
+ 
+.task-item.ng-leave {
+  animation: 1s deleted;
 }

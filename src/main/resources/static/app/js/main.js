@@ -2,7 +2,7 @@
 //				OSBO (Original Script By Ognjen)
 //==============================================================================================
 
-var app = angular.module("ppa", ["ngRoute"]);
+var app = angular.module("ppa", ["ngRoute", "ngAnimate"]);
 
 app.config(["$routeProvider", function($routeProvider) {
 	$routeProvider
